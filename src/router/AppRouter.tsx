@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Courses, Home, Login } from "../pages";
+import { AddCourse, Courses, Home, Login } from "../pages";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -13,5 +13,9 @@ export const AppRouter = createBrowserRouter([
   {
     path: "/admin",
     element: <Login />,
+  },
+  {
+    path: "/admin/addCourse",
+    element: <AddCourse />,
   }
 ]);

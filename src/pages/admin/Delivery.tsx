@@ -1,28 +1,30 @@
-import { Layout } from "..";
+import { Layout, Slogan, SloganCorrection } from "..";
 import { Button } from "../../components";
 import { useForm } from "../../hooks/useForm";
 
 interface IFormState {
-  courseName: string;
+  deliveryName: string;
 }
 
-export const AddCourse = () => {
+export const Delivery = () => {
   const { onInputChange, formState } = useForm<IFormState>({
-    courseName: "",
+    deliveryName: "",
   });
 
-  const { courseName } = formState;
+  const { deliveryName } = formState;
 
   return (
     <Layout>
-      <label>Nombre del curso</label>
+      <label>Nombre de la entrega</label>
       <input
-        name="courseName"
-        value={courseName}
+        name="deliveryName"
+        value={deliveryName}
         onChange={onInputChange}
         className="bg-[#44464e]  text-[#E5F876] p-2"
         type="text"
       />
+      <Slogan />
+      <SloganCorrection />
       <Button name="Entrar" />
     </Layout>
   );

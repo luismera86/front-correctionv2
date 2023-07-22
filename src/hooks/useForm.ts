@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useState } from 'react'
 
-export const useForm = (initialFom = {}) => {
+export const useForm = <T>(initialFom: T) => {
   const [formState, setFormState] = useState(initialFom)
 
   const onInputChange = ({ target }: any) => {

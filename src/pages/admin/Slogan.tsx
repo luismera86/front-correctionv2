@@ -14,6 +14,7 @@ export const Slogan = () => {
   const { title, description } = formState;
   return (
     <>
+      <h3 className="text-xl">Consigna</h3>
       <label>Título</label>
       <input
         name="title"

@@ -3,26 +3,31 @@ import { useForm } from "../../hooks/useForm";
 interface IFormState {
   title: string;
   description: string;
-  status: string;
+  status?: string;
 }
-export const SloganCorrection = () => {
-  // TODO Realizar un state con un array para que se sumen números y sean la cantidad de slogans que se quieran agregar luego de presionar el botón +. Realizar un map para que se muestren los inputs de acuerdo a la cantidad de slogans que se quieran agregar.
-  
-  
 
+interface SloganCorrectionProps {
+  setSloganCorrection: (slogan: IFormState) => void;
+}
+
+
+export const SloganCorrection = ({ setSloganCorrection}: SloganCorrectionProps) => {
+  // TODO Realizar un state con un array para que se sumen números y sean la cantidad de slogans que se quieran agregar luego de presionar el botón +. Realizar un map para que se muestren los inputs de acuerdo a la cantidad de slogans que se quieran agregar.
   const { onInputChange, formState } = useForm<IFormState>({
     title: "",
     description: "",
     status: "realized",
   });
-  const { title, description, status } = formState;
-  let count = 0;
+
+  const { title, description } = formState;
+  
   const handleAdd = () => {
-    count = count + 1;
-    console.log(count);
+    setSloganCorrection(formState);
+    console.log(formState)
   };
   return (
     <>
+      <h3 className="text-xl">Evaluación</h3>
        <label>Título</label>
       <input
         name="title"
@@ -38,7 +43,7 @@ export const SloganCorrection = () => {
         onChange={onInputChange}
         className="bg-[#44464e]  text-[#E5F876] p-2"
       /> 
-      <label>Estado</label>
+      {/* <label>Estado</label>
       <select
         name="status"
         value={status}
@@ -48,7 +53,7 @@ export const SloganCorrection = () => {
         <option value="realized">Realizado</option>
         <option value="incomplete">Incompleto</option>
         <option value="notRealized">No Realizado</option>
-      </select>
+      </select> */}
       <input type="button" value="+" onClick={handleAdd}/>
     </>
   )

@@ -1,4 +1,4 @@
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "../../shared/hooks/useForm";
 
 interface IFormState {
   title: string;

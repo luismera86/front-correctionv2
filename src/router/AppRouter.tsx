@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AddCourse, Courses, Delivery, Home, Login } from "../pages";
+import { App } from "../App";
 
 export const AppRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <App />,
   },
   {
     path: "/courses",

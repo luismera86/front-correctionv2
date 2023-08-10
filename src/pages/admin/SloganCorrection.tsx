@@ -1,4 +1,6 @@
-import { useForm } from "../../hooks/useForm";
+import { Button, SubPaper } from "../../components";
+import { useForm } from "../../shared/hooks/useForm";
+import { useCounterStore } from "../../shared/store/counterStore";
 
 interface IFormState {
   title: string;
@@ -10,8 +12,7 @@ interface SloganCorrectionProps {
   setSloganCorrection: (slogan: IFormState) => void;
 }
 
-
-export const SloganCorrection = ({ setSloganCorrection}: SloganCorrectionProps) => {
+export const SloganCorrection = ({ setSloganCorrection }: SloganCorrectionProps) => {
   // TODO Realizar un state con un array para que se sumen números y sean la cantidad de slogans que se quieran agregar luego de presionar el botón +. Realizar un map para que se muestren los inputs de acuerdo a la cantidad de slogans que se quieran agregar.
   const { onInputChange, formState } = useForm<IFormState>({
     title: "",
@@ -19,16 +20,17 @@ export const SloganCorrection = ({ setSloganCorrection}: SloganCorrectionProps) 
     status: "realized",
   });
 
+  const {count, increment, array} = useCounterStore()
+
   const { title, description } = formState;
-  
-  const handleAdd = () => {
-    setSloganCorrection(formState);
-    console.log(formState)
-  };
+
+  console.log(array)
+
+  // const handleAdd = () => {};
   return (
-    <>
+    <SubPaper>
       <h3 className="text-xl">Evaluación</h3>
-       <label>Título</label>
+      <label>Título</label>
       <input
         name="title"
         value={title}
@@ -42,7 +44,8 @@ export const SloganCorrection = ({ setSloganCorrection}: SloganCorrectionProps) 
         value={description}
         onChange={onInputChange}
         className="bg-[#44464e]  text-[#E5F876] p-2"
-      /> 
+      />
+
       {/* <label>Estado</label>
       <select
         name="status"
@@ -54,7 +57,9 @@ export const SloganCorrection = ({ setSloganCorrection}: SloganCorrectionProps) 
         <option value="incomplete">Incompleto</option>
         <option value="notRealized">No Realizado</option>
       </select> */}
-      <input type="button" value="+" onClick={handleAdd}/>
-    </>
-  )
-}
+      {/* <input type="button" value="+" onClick={handleAdd} /> */}
+      {count}
+      <Button name="+" onClick={increment} /> 
+    </SubPaper>
+  );
+};

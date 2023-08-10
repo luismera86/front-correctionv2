@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Layout, Slogan, SloganCorrection } from "..";
 import { Button, SubPaper } from "../../components";
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "../../shared/hooks/useForm";
 
 interface IFormState {
   deliveryName: string;
@@ -29,19 +29,19 @@ export const Delivery = () => {
 
   const [slogansCorrection, setSlogansCorrection] = useState<ISlogan[]>([]);
 
-  const handleAddSlogan = (slogan: ISlogan ) => {
+  const handleAddSlogan = (slogan: ISlogan) => {
     setSlogansCorrection([...slogansCorrection, slogan]);
   };
 
   useEffect(() => {
     console.log(slogansCorrection);
   }, [slogansCorrection]);
-  
+
   return (
     <Layout>
       <h3 className="text-xl mb-4">Curso</h3>
       {/* // TODO Aquí va el listado de los cursos registrados */}
-      <select name="" id="">
+      <select className="bg-[#44464e]  text-[#E5F876] p-2" name="" id="">
         <option value="">Curso 1</option>
         <option value="">Curso 2</option>
         <option value="">Curso 3</option>
@@ -59,9 +59,9 @@ export const Delivery = () => {
       <SubPaper>
         <Slogan />
       </SubPaper>
-      <SubPaper>
-        <SloganCorrection setSloganCorrection={handleAddSlogan} />
-      </SubPaper>
+
+      <SloganCorrection setSloganCorrection={handleAddSlogan} />
+
       <Button name="Entrar" />
     </Layout>
   );

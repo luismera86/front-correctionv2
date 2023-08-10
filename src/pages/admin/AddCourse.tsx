@@ -1,6 +1,6 @@
 import { Layout } from "..";
 import { Button } from "../../components";
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "../../shared/hooks/useForm";
 
 interface IFormState {
   courseName: string;

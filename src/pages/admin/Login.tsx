@@ -1,6 +1,6 @@
 import { Layout } from "..";
 import { Button, SubPaper } from "../../components";
-import { useForm } from "../../hooks";
+import { useForm } from "../../shared/hooks";
 
 interface IFormState {
   userName: string;
@@ -17,7 +17,7 @@ export const Login = () => {
 
   return (
     <Layout>
-      <SubPaper>
+      <>
         <label>Usuario</label>
         <input
           value={userName}
@@ -29,7 +29,7 @@ export const Login = () => {
         <label>Contraseña</label>
         <input value={password} name="password" className="bg-[#44464e]  text-[#E5F876] p-2" type="password" />
         <Button name="Entrar" />
-      </SubPaper>
+      </>
     </Layout>
   );
 };

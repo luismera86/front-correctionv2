@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { Layout, Slogan, SloganCorrection } from "..";
 import { Button, SubPaper } from "../../components";
 import { useForm } from "../../shared/hooks/useForm";
 import { useDeliveryStore, useSloganStore } from "../../shared/store";
+import { ShowSlogan } from "./showSlogan";
 
 interface IFormState {
   deliveryName: string;
@@ -26,7 +28,7 @@ export const Delivery = () => {
 
 
 const {description, title, comment, status } = useSloganStore();
-const {setCourse, setSlogan, setDeliveryTitle, getState } = useDeliveryStore();
+const {setCourse, setSlogan, setDeliveryTitle, getState, slogans } = useDeliveryStore();
 
 const { deliveryName, course } = formState;
 
@@ -43,6 +45,7 @@ const handleAdd = () => {
   console.log(getState());
 };
 
+console.log(slogans)
   
 
   return (
@@ -66,7 +69,9 @@ const handleAdd = () => {
       <SubPaper>
         <Slogan />
       </SubPaper>
-
+      {
+        slogans.map((slogan, index) => <ShowSlogan key={index} title={slogan.title} description={slogan.description} />)
+      }
       <SloganCorrection />
 
       <Button name="Entrar" onClick={handleAdd} />

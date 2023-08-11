@@ -12,6 +12,8 @@ export const Slogan = () => {
   });
 
   const { title, description } = formState;
+
+  console.log("componente slogan")
   return (
     <>
       <h3 className="text-xl">Consigna</h3>

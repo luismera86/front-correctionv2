@@ -1,6 +1,6 @@
 import { Button, SubPaper } from "../../components";
 import { useForm } from "../../shared/hooks/useForm";
-import { useSloganStore } from "../../shared/store";
+import { useDeliveryStore, useSloganStore } from "../../shared/store";
 import { useCounterStore } from "../../shared/store/counterStore";
 
 interface IFormState {
@@ -24,14 +24,14 @@ export const SloganCorrection = () => {
   const { count, increment } = useCounterStore();
   const { setTitle, setDescription, title: titleStore, description: descriptionStore, getState } = useSloganStore();
 
+  const {setSlogan} = useDeliveryStore();
+
   const { title, description } = formState;
 
   const handleAdd = () => {
     setTitle(title);
     setDescription(description);
-    console.log(titleStore);
-    console.log(descriptionStore);
-    console.log(getState());
+    setSlogan(getState());
   };
 
   // const handleAdd = () => {};

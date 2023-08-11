@@ -1,7 +1,7 @@
-import { SloganIF } from "./slogan.interface";
+import { ISlogan } from ".";
 
-export interface DeliveryIF {
+export interface IDelivery {
   course: string;
   deliveryTitle: string;
-  slogans: SloganIF[];
+  slogans: ISlogan[];
 }

@@ -1,7 +1,8 @@
 
-export interface SloganIF {
+export interface ISlogan {
   title: string;
   description: string;
-  status?: string;
+  status?: "realized" | "incomplete" | "not realized";
   comment?: string;
 }
+

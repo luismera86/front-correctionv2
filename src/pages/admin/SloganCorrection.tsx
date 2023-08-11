@@ -1,5 +1,6 @@
 import { Button, SubPaper } from "../../components";
 import { useForm } from "../../shared/hooks/useForm";
+import { useSloganStore } from "../../shared/store";
 import { useCounterStore } from "../../shared/store/counterStore";
 
 interface IFormState {
@@ -12,7 +13,7 @@ interface SloganCorrectionProps {
   setSloganCorrection: (slogan: IFormState) => void;
 }
 
-export const SloganCorrection = ({ setSloganCorrection }: SloganCorrectionProps) => {
+export const SloganCorrection = () => {
   // TODO Realizar un state con un array para que se sumen números y sean la cantidad de slogans que se quieran agregar luego de presionar el botón +. Realizar un map para que se muestren los inputs de acuerdo a la cantidad de slogans que se quieran agregar.
   const { onInputChange, formState } = useForm<IFormState>({
     title: "",
@@ -20,11 +21,18 @@ export const SloganCorrection = ({ setSloganCorrection }: SloganCorrectionProps)
     status: "realized",
   });
 
-  const {count, increment, array} = useCounterStore()
+  const { count, increment } = useCounterStore();
+  const { setTitle, setDescription, title: titleStore, description: descriptionStore, getState } = useSloganStore();
 
   const { title, description } = formState;
 
-  console.log(array)
+  const handleAdd = () => {
+    setTitle(title);
+    setDescription(description);
+    console.log(titleStore);
+    console.log(descriptionStore);
+    console.log(getState());
+  };
 
   // const handleAdd = () => {};
   return (
@@ -59,7 +67,7 @@ export const SloganCorrection = ({ setSloganCorrection }: SloganCorrectionProps)
       </select> */}
       {/* <input type="button" value="+" onClick={handleAdd} /> */}
       {count}
-      <Button name="+" onClick={increment} /> 
+      <Button name="+" onClick={handleAdd} />
     </SubPaper>
   );
 };

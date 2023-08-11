@@ -1,22 +1,19 @@
-import { useEffect, useState } from "react";
 import { Layout, Slogan, SloganCorrection } from "..";
 import { Button, SubPaper } from "../../components";
 import { useForm } from "../../shared/hooks/useForm";
+import { useDeliveryStore, useSloganStore } from "../../shared/store";
 
 interface IFormState {
   deliveryName: string;
+  course: string;
 }
 
-interface ISlogan {
-  title: string;
-  description: string;
-}
 
 export const Delivery = () => {
   const { onInputChange, formState } = useForm<IFormState>({
     deliveryName: "",
+    course: "",
   });
-  const { deliveryName } = formState;
 
   // Contador para saber la cantidad de slogans que se quieren agregar
   // Un handleAdd que sume 1 al contador
@@ -27,24 +24,34 @@ export const Delivery = () => {
   // Un botón que diga eliminar slogan y que al presionarlo se elimine un input
   // Un botón que diga guardar y que al presionarlo guarde los slogans en el array slogans
 
-  const [slogansCorrection, setSlogansCorrection] = useState<ISlogan[]>([]);
 
-  const handleAddSlogan = (slogan: ISlogan) => {
-    setSlogansCorrection([...slogansCorrection, slogan]);
+const {description, title, comment, status } = useSloganStore();
+const {setCourse, setSlogan, setDeliveryTitle, getState } = useDeliveryStore();
+
+const { deliveryName, course } = formState;
+
+const handleAdd = () => {
+  const newSlogan = {
+    title,
+    description,
+    comment,
+    status,
   };
+  setCourse(course);
+  setSlogan(newSlogan);
+  setDeliveryTitle(deliveryName);
+  console.log(getState());
+};
 
-  useEffect(() => {
-    console.log(slogansCorrection);
-  }, [slogansCorrection]);
+  
 
   return (
     <Layout>
       <h3 className="text-xl mb-4">Curso</h3>
-      {/* // TODO Aquí va el listado de los cursos registrados */}
-      <select className="bg-[#44464e]  text-[#E5F876] p-2" name="" id="">
-        <option value="">Curso 1</option>
-        <option value="">Curso 2</option>
-        <option value="">Curso 3</option>
+      <select onChange={onInputChange} className="bg-[#44464e]  text-[#E5F876] p-2" name="course" value={course} >
+        <option value="curso1">Curso 1</option>
+        <option value="curso2">Curso 2</option>
+        <option value="curso3">Curso 3</option>
       </select>
       <SubPaper>
         <label>Nombre de la entrega</label>
@@ -60,9 +67,9 @@ export const Delivery = () => {
         <Slogan />
       </SubPaper>
 
-      <SloganCorrection setSloganCorrection={handleAddSlogan} />
+      <SloganCorrection />
 
-      <Button name="Entrar" />
+      <Button name="Entrar" onClick={handleAdd} />
     </Layout>
   );
 };

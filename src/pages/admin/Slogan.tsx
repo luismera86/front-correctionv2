@@ -1,3 +1,4 @@
+import { SubPaper } from "../../components";
 import { useForm } from "../../shared/hooks/useForm";
 
 interface IFormState {
@@ -15,7 +16,7 @@ export const Slogan = () => {
 
   console.log("componente slogan")
   return (
-    <>
+    <SubPaper>
       <h3 className="text-xl">Consigna</h3>
       <label>Título</label>
       <input
@@ -32,6 +33,6 @@ export const Slogan = () => {
         onChange={onInputChange}
         className="bg-[#44464e]  text-[#E5F876] p-2"
       />
-    </>
+    </SubPaper>
   );
 };

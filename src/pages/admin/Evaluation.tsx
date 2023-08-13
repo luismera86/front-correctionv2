@@ -22,9 +22,9 @@ export const Evaluation = () => {
   const handleAdd = () => {
     setDescription(description);
     setSlogan(getState());
+    onInputChange({ target: { name: "description", value: "" } });
   };
 
-  // const handleAdd = () => {};
   return (
     <SubPaper>
       <h3 className="text-xl">Evaluación</h3>

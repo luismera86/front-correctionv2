@@ -1,31 +1,29 @@
 import { SubPaper } from "../../components";
 import { useForm } from "../../shared/hooks/useForm";
+import { useDeliveryStore } from "../../shared/store";
+import { useEffect } from "react";
 
 interface IFormState {
-  title: string;
   description: string;
 }
 
 export const Slogan = () => {
   const { onInputChange, formState } = useForm<IFormState>({
-    title: "",
     description: "",
   });
 
-  const { title, description } = formState;
+  const { description } = formState;
 
-  console.log("componente slogan")
+  const { setDeliveryDescription } = useDeliveryStore();
+
+  useEffect(() => {
+    setDeliveryDescription(description);
+  }, [description]);
+
   return (
     <SubPaper>
       <h3 className="text-xl">Consigna</h3>
-      <label>Título</label>
-      <input
-        name="title"
-        value={title}
-        onChange={onInputChange}
-        className="bg-[#44464e]  text-[#E5F876] p-2"
-        type="text"
-      />
+
       <label>Descripción</label>
       <textarea
         name="description"

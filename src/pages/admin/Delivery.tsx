@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
 import { Evaluation, Layout, Slogan } from "..";
+import { getCourses } from "../../api/jsonApi";
 import { Button, SubPaper } from "../../components";
 import { useForm } from "../../shared/hooks/useForm";
-import { useDeliveryStore, useEvaluationStore } from "../../shared/store";
+import { useDeliveryStore } from "../../shared/store";
 import { ShowSlogan } from "./showSlogan";
 
 interface IFormState {
@@ -14,6 +16,14 @@ export const Delivery = () => {
     deliveryName: "",
     course: "",
   });
+
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    getCourses().then((data) => setCourses(data))
+
+    console.log(courses)
+  }, []);
 
   const { setCourse, setDeliveryTitle, getState, slogans } = useDeliveryStore();
 
@@ -32,9 +42,11 @@ export const Delivery = () => {
       <h3 className="text-xl mb-4">Curso</h3>
       <select onChange={onInputChange} className="bg-[#44464e]  text-[#E5F876] p-2" name="course" value={course}>
         <option value="">Cursos</option>
-        <option value="curso1">Curso 1</option>
-        <option value="curso2">Curso 2</option>
-        <option value="curso3">Curso 3</option>
+        {courses.map((course) => (
+          <option key={course.id} value={course.name}>
+            {course.name}
+          </option>
+        ))}
       </select>
       <SubPaper>
         <label>Nombre de la entrega</label>
